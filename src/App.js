@@ -1,26 +1,26 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './css/App.css';
+import Login from './scenes/Login'
 
 class App extends Component {
+
+  state={
+    isLogado:false,
+    usuario:{}
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+        <div className={'App-header'}>
+          <div className={'ui container login'}>
+            <h1>Profissional</h1>
+            <h1 className={'colorLaranja'}>Agenda na mão</h1>
+            {!this.state.isLogado && <Login/>}
+
+          </div>
+          </div>
+        </div>
     );
   }
 }
