@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Form} from "semantic-ui-react";
 import arrow from "../img/arrow-right.svg";
 import '../css/App.css';
+import Cadastro from './Cadastro'
 
 class Login extends Component
 {
@@ -9,7 +10,6 @@ class Login extends Component
         return (
         <Form>
             <Form.Field>
-
                 <input placeholder='Digite seu email' />
             </Form.Field>
             <Form.Field>
@@ -18,7 +18,7 @@ class Login extends Component
             <Form.Field>
                 <div className={'columnContainer'}>
                     <div className={'alignLeft'}>Esqueceu a senha? <a className={'colorLaranja'} href="#">Clique aqui</a></div>
-                    <div className={'alignRight'}>Primeiro acesso? <a className={'colorLaranja'} href="#">Clique aqui</a></div>
+                    <Cadastro cadastrar={this.props.cadastrar}/>
                 </div>
             </Form.Field>
             <button className={'buttonPrimary'} type='submit'>Login <img alt=""  src={arrow}/></button>

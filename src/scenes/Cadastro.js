@@ -1,18 +1,51 @@
 import React, { Component } from 'react';
-import { Button, Header, Image, Modal } from 'semantic-ui-react'
+import { Button, Header, Form, Modal,Label } from 'semantic-ui-react'
+import '../css/App.css';
 class Cadastro extends Component
 {
-    render(){
-        return(
+    state =
+        {
+           senha:'',
+           email:''
+        }
+    Handler = field => event =>{
 
+        this.setState({
+            [field]: event.target.value
+        })
+    }
+
+    cadastrar = ()=>{
+        this.props.cadastrar(this.state.email,this.state.senha)
+
+    }
+
+    render(){
+        const errorMessages={
+            'auth/email-already-in-use': 'Já existe este usuario cadastrado!',
+            'auth/weak-password': 'Senha fraca',
+            'auth/invalid-email':'Email inválido!',
+        }
+        return(
             <div>
-                <Modal trigger={<Button>Show Modal</Button>}>
+                <Modal trigger={<div className={'alignRight'}>Primeiro acesso? <a className={'colorLaranja'} href="#">Clique aqui</a></div>}>
                     <Modal.Header>Cadastre-se aqui!</Modal.Header>
                     <Modal.Content>
                         <Modal.Description>
                             <Header>Digite seus Dados</Header>
-                            <p>We've found the following gravatar image associated with your e-mail address.</p>
-                            <p>Is it okay to use this photo?</p>
+                            <Form>
+                                <Form.Field>
+                                    <input onChange={this.Handler('email')} placeholder='Digite seu email' />
+                                </Form.Field>
+                                <Form.Field>
+                                    <input onChange={this.Handler('senha')} placeholder='Digite sua senha' type={'password'} />
+                                </Form.Field>
+                                <Button onClick={this.cadastrar()} primary >Cadastrar</Button>
+                                {
+                                    this.props.isSignUpError && <Label color={'red'}>{errorMessages[this.props.signUpError]}</Label>
+                                }
+                            </Form>
+
                         </Modal.Description>
                     </Modal.Content>
                 </Modal>
