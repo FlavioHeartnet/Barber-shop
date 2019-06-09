@@ -6,14 +6,31 @@ import Cadastro from './Cadastro'
 
 class Login extends Component
 {
+    state =
+        {
+            senha:'',
+            email:''
+        }
+    login= ()=>
+    {
+        this.props.logar(this.state.email, this.state.senha)
+    }
+
+    Handler = field => event =>{
+
+        this.setState({
+            [field]: event.target.value
+        })
+    }
+
     render(){
         return (
         <Form>
             <Form.Field>
-                <input placeholder='Digite seu email' />
+                <input onChange={this.Handler('email')} placeholder='Digite seu email' />
             </Form.Field>
             <Form.Field>
-                <input placeholder='Digite sua senha' type={'password'} />
+                <input onChange={this.Handler('senha')} placeholder='Digite sua senha' type={'password'} />
             </Form.Field>
             <Form.Field>
                 <div className={'columnContainer'}>
@@ -21,7 +38,7 @@ class Login extends Component
                     <Cadastro cadastrar={this.props.cadastrar}/>
                 </div>
             </Form.Field>
-            <button className={'buttonPrimary'} type='submit'>Login <img alt=""  src={arrow}/></button>
+            <button className={'buttonPrimary'} onClick={this.login} type='submit'>Login <img alt=""  src={arrow}/></button>
         </Form>
 
         )

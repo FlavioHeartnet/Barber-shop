@@ -34,6 +34,51 @@ class App extends Component {
       this.setState({ isLoading: false });
   }
 
+  logar = async (email,senha) =>{
+
+      try{
+          const {auth} = this.props;
+          const user = await auth.signInWithEmailAndPassword(email,senha)
+
+      }catch (e) {
+          this.setState({
+              signUpError: e.code,
+              isSignUpError:true
+
+          })
+          console.log(this.state.signUpError)
+      }
+
+  }
+    componentDidMount() {
+        this.setState({ isLoading: true });
+
+        this.props.auth.onAuthStateChanged(user =>{
+            if(user)
+            {
+                this.setState({
+                    isLogado:true,
+                    user
+                })
+
+            }else{
+                this.setState({
+                    isLogado:false,
+                    user:{}
+                })
+
+            }
+            this.setState({ isLoading: false });
+        })
+
+
+    }
+
+    Sair = () =>{
+        const {auth} = this.props;
+        auth.signOut();
+    }
+
   render() {
     return (
       <div className="App">
@@ -42,7 +87,8 @@ class App extends Component {
             <h1>Profissional</h1>
             <h1 className={'colorLaranja'}>Agenda na mão</h1>
             {this.state.isLoading && <CustomLoader/>}
-            {!this.state.isLogado && <Login signUpError={this.state.signUpError} cadastrar={this.cadastrar}/>}
+            {this.state.isLogado && <div onClick={this.Sair} className={'ui red inverted button'}>Sair</div>}
+            {!this.state.isLogado && <Login signUpError={this.state.signUpError} logar={this.logar} cadastrar={this.cadastrar}/>}
 
           </div>
           </div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Header, Form, Modal,Label } from 'semantic-ui-react'
+import {  Header, Form, Modal,Label } from 'semantic-ui-react'
 import '../css/App.css';
 class Cadastro extends Component
 {
@@ -40,7 +40,7 @@ class Cadastro extends Component
                                 <Form.Field>
                                     <input onChange={this.Handler('senha')} placeholder='Digite sua senha' type={'password'} />
                                 </Form.Field>
-                                <Button onClick={this.cadastrar()} primary >Cadastrar</Button>
+                                <div onClick={this.cadastrar} className={'ui primary button'} >Cadastrar</div>
                                 {
                                     this.props.isSignUpError && <Label color={'red'}>{errorMessages[this.props.signUpError]}</Label>
                                 }
