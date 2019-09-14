@@ -1,6 +1,7 @@
 import React from 'react';
 import 'fullcalendar-reactwrapper/dist/css/fullcalendar.min.css'
 import FullCalendar from 'fullcalendar-reactwrapper';
+import Back from './Back'
 
 class Calendar extends React.Component {
     constructor(props) {
@@ -52,6 +53,7 @@ class Calendar extends React.Component {
     render() {
         return (
             <div id="example-component">
+                <Back/>
                 <h1>Agende um horario!</h1>
                 <FullCalendar 
                     id = "999"
